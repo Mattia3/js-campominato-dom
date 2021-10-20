@@ -1,0 +1,41 @@
+.btn-play{
+  width: 80px;
+  height: 30px;
+}
+
+.my-form{
+  width: 130px;
+  height: 30px;
+}
+
+main{
+  background-color: #7fffd4;
+}
+
+#container-grid{
+  display: flex;
+  border: 1px solid black;
+  flex-wrap: wrap;
+  height: 700px;
+  width: 700px;
+  
+}
+
+.celle{
+ border: 1px solid black;
+ justify-content: center;
+ display: flex;
+ align-items: center;
+ cursor: pointer;
+}
+
+.background-cella{
+  background-color: #0800ff52;
+}
+
+.background-lose{
+  background-color: red;
+}
+
+
+
