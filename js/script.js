@@ -13,7 +13,9 @@ const contGrid = document.getElementById("container-grid");
 btnPlay.addEventListener("click", function(){
   const value = difficolta.value;
   const totalCell = numeroCelle(value);
+  let arrayBombe = generaBombeFor(totalCell, 16)
   gridCreate(totalCell);
+  console.log("stampa arrey", arrayBombe)
 })
 
 function numeroCelle(value){
@@ -63,15 +65,16 @@ function gridCreate(cellsNumber){
   } 
 
   //creo un ciclo dove vado a specificare i numeri in base alla difficoltà
-  
-  let arrayBomb = [];
-  for (x = 0; x < 16; x++){
+   /*let arrayBomb = [];
+  for (x = 1; x < 16; x++){
     let nuovaBomba = generaNumeriRandom()
+    
     if(difficolta.value === "1"){
         nuovaBomba = generaNumeriRandom(1, 100)
-        arrayBomb.push(nuovaBomba)
         console.log("Numeri bombe", nuovaBomba)
+        arrayBomb.push(nuovaBomba)
     }
+   console.log(arrayBomb)
     if(difficolta.value === "2"){
         nuovaBomba = generaNumeriRandom(1, 81)
         console.log("Numeri bombe", nuovaBomba)
@@ -80,32 +83,42 @@ function gridCreate(cellsNumber){
         nuovaBomba = generaNumeriRandom(1, 49)
         console.log("Numeri bombe", nuovaBomba)
     }
-  }
+  }*/
 }
-      
-
+     
 function backgroundCella(){
+  const nCella = parseInt(this.textContent)
+  console.log(nCella)
+  if(arrayBombe.includes(nCella)){
+    this.classList.add("background-lose")
+    console.log(this)
+    alert("Hai perso")
+    location.reload()
+  }
   this.classList.toggle("background-cella");
 }
 
-function backgroundLose(){
-  this.classList.toggle("background-lose")
-}
 
+ function generaBombeFor(numCels, numBombe){
+     arrayBombe = [];
 
-
-//1- Generare 16 numeri casuali(bombe) Fatto
-  //1_2 - Tenedo conto delle varie difficoltà(1, 2, 3)
-  //1_2 - I numeri non devono essere replicati
-//2 - Al click: se il numero è presente nella lista dei numeri generati
-  //2_2 - abbiamo calpestato una bomba
-    //2_3 - la cella si colora di rosso e la partita termina
-     //2_4 - altrimenti la cella cliccata si colora di azzurro e l’utente può continuare a cliccare sulle altre celle.
-
-
+    for(let x = 0; x < numBombe; x++){
+      const nuovaBomba = generaNumeriRandom(1, numCels);
+      console.log("Numero random tra 1 e max Random", nuovaBomba)
+      let numeroEsiste = arrayBombe.includes(nuovaBomba);
+      if(!numeroEsiste){
+        arrayBombe.push(nuovaBomba);
+      }else{
+        x--;
+      }
+    }
+    return arrayBombe;
+  }
+  
+  
   //Genera i numeri random da 1 a 16
-function generaNumeriRandom(minNumber, maxNumber) {
+function generaNumeriRandom(minNumber = 1, maxNumber = 16) {
   const numRandom = Math.floor(Math.random() * (maxNumber - minNumber + 1) + minNumber);
   return numRandom;
 }
- 
+console.log(generaNumeriRandom(1, 16))
