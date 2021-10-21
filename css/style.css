@@ -18,7 +18,14 @@ main{
   flex-wrap: wrap;
   height: 700px;
   width: 700px;
-  
+}
+
+.stop-game{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .celle{

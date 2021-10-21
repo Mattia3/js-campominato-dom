@@ -63,7 +63,7 @@ function gridCreate(cellsNumber){
 
     cella.addEventListener("click", backgroundCella);
   } 
-
+}
   //creo un ciclo dove vado a specificare i numeri in base alla difficoltà
    /*let arrayBomb = [];
   for (x = 1; x < 16; x++){
@@ -84,8 +84,8 @@ function gridCreate(cellsNumber){
         console.log("Numeri bombe", nuovaBomba)
     }
   }*/
-}
-     
+
+ 
 function backgroundCella(){
   const nCella = parseInt(this.textContent)
   console.log(nCella)
@@ -93,7 +93,8 @@ function backgroundCella(){
     this.classList.add("background-lose")
     console.log(this)
     alert("Hai perso")
-    location.reload()
+    showAllBomb();
+    contGrid.innerHTML += `<div class="stop-game"></div>`
   }
   this.classList.toggle("background-cella");
 }
@@ -115,6 +116,20 @@ function backgroundCella(){
     return arrayBombe;
   }
   
+
+function showAllBomb(){
+  const celleBomb = contGrid.querySelectorAll(".celle")
+
+  for (y = 0; y < arrayBombe.length; y++){
+    const bomba = arrayBombe[y];
+    const indiceDaCercare = bomba - 1;
+    if (indiceDaCercare >= celleBomb.length) {
+      continue
+    }
+    const bombCell = celleBomb[indiceDaCercare];
+    bombCell.classList.add("background-lose");
+  }
+}
   
   //Genera i numeri random da 1 a 16
 function generaNumeriRandom(minNumber = 1, maxNumber = 16) {
